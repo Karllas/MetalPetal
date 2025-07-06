@@ -84,7 +84,7 @@ public struct MTICoreImageKernel {
                     let pipeline = (try renderingContext.context.kernelState(for: MTIRenderPipelineKernel.passthrough, configuration: MTIRenderPipelineKernelConfiguration(colorAttachmentPixelFormat: .bgra8Unorm))) as! MTIRenderPipeline
                     commandEncoder.setRenderPipelineState(pipeline.state)
                     commandEncoder.setFragmentTexture(texture, index: 0)
-                    commandEncoder.setFragmentSamplerState(try renderingContext.context.samplerState(with: MTISamplerDescriptor.default), index: 0)
+                    commandEncoder.setFragmentSamplerState(try renderingContext.context.samplerState(with: MTISamplerDescriptor.defaultSamplerDescriptor(with: .mirrorRepeat)), index: 0)
                     MTIVertices.fullViewportSquare.encodeDrawCall(with: commandEncoder, context: pipeline)
                     commandEncoder.endEncoding()
                     return try ciImage(for: $0, from: tempTexture)
